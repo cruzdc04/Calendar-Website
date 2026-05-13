@@ -36,7 +36,7 @@ body{
     align-items: center;
     font-size: 25px;
     font-weight: 600px; 
-    color:black 
+    color:white
 }
 .calendar .header .btns {
     display: flex;
@@ -57,4 +57,45 @@ body{
 .calendar .header .btns .btn:hover{
     background-color: #8458B3;
     transform: scale(1.06);
+}
+.weekdays {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;;
+}
+.weekdays .day{
+    width: calc(100% / 7 - 10px);
+    text-align: center;
+    font-size: 17px;
+    font-weight: 10;
+}
+.days{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.days .day{
+    width: calc(100% / 7 - 10px);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 10px;
+    color: black;
+    background-color: #e5eaf5;
+}
+.days .day:not(.next):not(.prev):hover{
+    color: #e5eaf5;
+    background-color: #8458B3;
+    transform: scale(1.04);
+}
+.days .day.today{
+    color: #e5eaf5;
+    background-color: #8458B3;
+}
+.days .day.next,
+.days .day.prev{
+   color: #ccc;
 }
