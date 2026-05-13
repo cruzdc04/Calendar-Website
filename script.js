@@ -90,4 +90,18 @@ todayBtn.addEventListener("click", () => {
     currentYear = date.getFullYear();
 
     renderCalendar();
-})
+});
+
+const themeToggle = document.getElementById("theme-toggle");
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")) {
+        themeToggle.innerText = "Light Mode";
+    } else {
+        themeToggle.innerText = "Dark Mode";
+    }
+
+});

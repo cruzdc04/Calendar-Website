@@ -99,3 +99,30 @@ body{
 .days .day.prev{
    color: #ccc;
 }
+.dark {
+    background-color: #494D5F;
+    color: #e5eaf5;
+}
+
+.dark .calendar {
+    background-color: #659ebb;
+}
+
+.dark .day {
+    background-color: #494D5F;
+    color: #e5eaf5;
+}
+#theme-toggle {
+    background-color: #8758b3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 1px;
+    cursor: pointer;
+}
+#theme-toggle:hover {
+    background-color: #8758b3;
+    transform: scale(1.04);
+}
