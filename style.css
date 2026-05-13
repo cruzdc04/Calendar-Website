@@ -1,16 +1,137 @@
+/* ── Variables ─────────────────────────────────────────── */
+:root {
+  --purple:     #8458B3;
+  --purple-h:   #6e3fa0;
+  --blue:       #a0d2eb;
+  --body-bg:    #e5eaf5;
+  --surface:    #e5eaf5;
+  --card:       #fff;
+  --panel:      #a0d2eb;
+  --modal-bg:   #e5eaf5;
+  --text:       #333;
+  --text-2:     #555;
+  --text-muted: #888;
+  --ui:         Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  --body:       Arial, sans-serif;
+  --r:          5px;
+  --R:          10px;
+  --t:          0.15s;
+}
+
+body.dark {
+  --body-bg:    #494D5F;
+  --surface:    #494D5F;
+  --card:       #3a3d4d;
+  --panel:      #659ebb;
+  --modal-bg:   #3a3d4d;
+  --text:       #e5eaf5;
+  --text-2:     #ccc;
+  --text-muted: #aaa;
+}
+
+/* ── Reset & Base ──────────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 body {
-  background-color: #e5eaf5;
+  font-family: var(--body);
+  background-color: var(--body-bg);
   transition: background-color 0.3s;
 }
 
-/* ── Layout ────────────────────────────────────────────── */
+/* Impact only where intentional */
+h1, h2, h3, button,
+.topbar-logo, .month, .planner-date,
+.days .day, .weekdays .day,
+.btn-primary {
+  font-family: var(--ui);
+}
+
+/* Form elements don't inherit font in all browsers */
+input, textarea {
+  font-family: var(--body);
+  color: var(--text);
+}
+
+/* ── Topbar ────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  background-color: var(--purple);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar-logo {
+  font-size: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-home {
+  color: white;
+  text-decoration: none;
+  margin-right: 6px;
+  opacity: 0.75;
+  transition: opacity var(--t);
+}
+
+.topbar-home:hover {
+  opacity: 1;
+}
+
+.login-btn,
+#theme-toggle {
+  border: none;
+  border-radius: var(--r);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: transform var(--t);
+}
+
+.login-btn {
+  background: white;
+  color: var(--purple);
+  padding: 9px 18px;
+}
+
+.login-btn:hover {
+  transform: scale(1.05);
+  background: #f0e8ff;
+}
+
+#theme-toggle {
+  background: var(--purple);
+  color: white;
+  padding: 10px 15px;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.05);
+}
+
+body.dark .login-btn {
+  background: var(--surface);
+  color: var(--text);
+}
+
+body.dark .login-btn:hover {
+  background: #5a5d70;
+}
+
+/* ── Calendar Page ─────────────────────────────────────── */
 .container {
   width: 100%;
   min-height: 100vh;
@@ -21,15 +142,13 @@ body {
   padding: 40px 20px;
 }
 
-/* ── Calendar ──────────────────────────────────────────── */
 .calendar {
   width: 100%;
   max-width: 600px;
   padding: 30px 20px;
-  border-radius: 10px;
-  background-color: #a0d2eb;
+  border-radius: var(--R);
+  background-color: var(--panel);
   flex-shrink: 0;
-  transition: background-color 0.3s;
 }
 
 .calendar .header {
@@ -38,12 +157,11 @@ body {
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #8458B3;
+  border-bottom: 2px solid var(--purple);
 }
 
 .calendar .header .month {
   font-size: 25px;
-  font-weight: 600;
   color: white;
 }
 
@@ -58,12 +176,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  color: #fff;
-  background-color: #8458B3;
+  border-radius: var(--r);
+  color: white;
+  background: var(--purple);
   font-size: 16px;
   cursor: pointer;
-  transition: transform 0.15s;
+  transition: transform var(--t);
 }
 
 .calendar .header .btns .btn:hover {
@@ -96,34 +214,34 @@ body {
   align-items: center;
   justify-content: flex-start;
   padding-top: 6px;
-  border-radius: 5px;
+  border-radius: var(--r);
   font-size: 15px;
-  color: black;
-  background-color: #e5eaf5;
+  color: var(--text);
+  background: var(--surface);
   cursor: pointer;
-  transition: transform 0.15s, background-color 0.2s;
+  transition: transform var(--t), background-color 0.2s;
   position: relative;
   overflow: hidden;
 }
 
 .days .day:not(.next):not(.prev):hover {
-  color: #e5eaf5;
-  background-color: #8458B3;
+  color: white;
+  background: var(--purple);
   transform: scale(1.04);
 }
 
 .days .day:not(.next):not(.prev):hover .task-dot-label {
-  background-color: rgba(255,255,255,0.25);
-  color: #fff;
+  background: rgba(255,255,255,0.25);
+  color: white;
 }
 
 .days .day.today {
-  color: #e5eaf5;
-  background-color: #8458B3;
+  color: white;
+  background: var(--purple);
 }
 
 .days .day.selected {
-  outline: 3px solid #fff;
+  outline: 3px solid white;
   outline-offset: -3px;
 }
 
@@ -133,7 +251,6 @@ body {
   cursor: default;
 }
 
-/* Task dots on calendar cells */
 .task-dots {
   display: flex;
   flex-direction: column;
@@ -145,41 +262,43 @@ body {
 
 .task-dot-label {
   font-size: 9px;
-  background-color: rgba(132, 88, 179, 0.25);
+  background: rgba(132,88,179,0.25);
   color: #5a3a8a;
   border-radius: 3px;
   padding: 1px 3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
   display: block;
-  font-family: Arial, sans-serif;
 }
 
 .days .day.today .task-dot-label {
-  background-color: rgba(255,255,255,0.25);
-  color: #fff;
+  background: rgba(255,255,255,0.25);
+  color: white;
 }
 
 .task-dot-label.more {
-  background-color: rgba(132, 88, 179, 0.4);
+  background: rgba(132,88,179,0.4);
   text-align: center;
+}
+
+body.dark .task-dot-label {
+  background: rgba(255,255,255,0.15);
+  color: #e5eaf5;
 }
 
 /* ── Planner Panel ─────────────────────────────────────── */
 .planner {
   width: 300px;
   flex-shrink: 0;
-  background-color: #a0d2eb;
-  border-radius: 10px;
+  background: var(--panel);
+  border-radius: var(--R);
   padding: 20px;
   display: none;
   flex-direction: column;
   gap: 16px;
   max-height: 90vh;
   overflow-y: auto;
-  transition: background-color 0.3s;
 }
 
 .planner.open {
@@ -190,14 +309,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #8458B3;
+  border-bottom: 2px solid var(--purple);
   padding-bottom: 12px;
 }
 
 .planner-date {
   font-size: 18px;
   color: white;
-  font-weight: 600;
 }
 
 .planner-close {
@@ -207,42 +325,39 @@ body {
   font-size: 18px;
   cursor: pointer;
   padding: 4px 6px;
-  border-radius: 5px;
+  border-radius: var(--r);
 }
 
 .planner-close:hover {
-  background-color: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.2);
 }
 
-/* Task list */
 .task-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  min-height: 40px;
 }
 
 .no-tasks {
   color: rgba(255,255,255,0.7);
   font-size: 14px;
-  font-family: Arial, sans-serif;
   text-align: center;
   padding: 10px 0;
 }
 
 .task-item {
-  background-color: #e5eaf5;
-  border-radius: 6px;
+  background: var(--surface);
+  border-radius: var(--r);
   padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  transition: background-color 0.15s, transform 0.15s;
+  transition: background var(--t), transform var(--t);
 }
 
 .task-item:hover {
-  background-color: #8458B3;
+  background: var(--purple);
   color: white;
   transform: scale(1.02);
 }
@@ -253,7 +368,6 @@ body {
 
 .task-item-title {
   font-size: 14px;
-  font-family: Arial, sans-serif;
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -261,30 +375,26 @@ body {
 }
 
 .task-item-has-desc {
-  color: #8458B3;
+  color: var(--purple);
   font-size: 12px;
   margin-left: 8px;
-  flex-shrink: 0;
 }
 
-/* Add task form */
 .add-task-form {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-top: 2px solid #8458B3;
+  border-top: 2px solid var(--purple);
   padding-top: 14px;
 }
 
 .add-task-form input,
 .add-task-form textarea {
   border: none;
-  border-radius: 6px;
+  border-radius: var(--r);
   padding: 9px 12px;
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  background-color: #e5eaf5;
-  color: #333;
+  background: var(--surface);
   resize: none;
   outline: none;
   transition: box-shadow 0.2s;
@@ -292,36 +402,39 @@ body {
 
 .add-task-form input:focus,
 .add-task-form textarea:focus {
-  box-shadow: 0 0 0 2px #8458B3;
+  box-shadow: 0 0 0 2px var(--purple);
 }
 
 .add-task-form textarea {
   height: 70px;
 }
 
+.add-task-form input::placeholder,
+.add-task-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
 .add-task-form button {
-  background-color: #8458B3;
+  background: var(--purple);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--r);
   padding: 10px;
   font-size: 14px;
-  font-family: Impact, sans-serif;
   cursor: pointer;
-  transition: transform 0.15s, background-color 0.15s;
-  letter-spacing: 0.5px;
+  transition: transform var(--t), background var(--t);
 }
 
 .add-task-form button:hover {
   transform: scale(1.03);
-  background-color: #6e3fa0;
+  background: var(--purple-h);
 }
 
 /* ── Modal ─────────────────────────────────────────────── */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.45);
   display: none;
   align-items: center;
   justify-content: center;
@@ -334,8 +447,8 @@ body {
 }
 
 .modal {
-  background-color: #e5eaf5;
-  border-radius: 10px;
+  background: var(--modal-bg);
+  border-radius: var(--R);
   padding: 24px;
   max-width: 400px;
   width: 100%;
@@ -354,7 +467,7 @@ body {
 
 .modal-title {
   font-size: 20px;
-  color: #333;
+  color: var(--text);
   line-height: 1.3;
 }
 
@@ -363,119 +476,504 @@ body {
   border: none;
   font-size: 18px;
   cursor: pointer;
-  color: #888;
+  color: var(--text-muted);
   padding: 2px 6px;
   border-radius: 4px;
-  flex-shrink: 0;
 }
 
 .modal-close:hover {
-  color: #333;
-  background-color: rgba(0,0,0,0.08);
+  color: var(--text);
+  background: rgba(0,0,0,0.08);
 }
 
 .modal-desc {
   font-size: 14px;
-  font-family: Arial, sans-serif;
-  color: #555;
+  color: var(--text-2);
   line-height: 1.6;
   white-space: pre-wrap;
-  min-height: 40px;
 }
 
 .modal-delete {
   align-self: flex-end;
-  background-color: #c0392b;
+  background: #c0392b;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--r);
   padding: 8px 14px;
   font-size: 13px;
-  font-family: Impact, sans-serif;
   cursor: pointer;
-  transition: transform 0.15s, background-color 0.15s;
-  letter-spacing: 0.5px;
+  transition: transform var(--t), background var(--t);
 }
 
 .modal-delete:hover {
   transform: scale(1.04);
-  background-color: #a93226;
+  background: #a93226;
 }
 
-/* ── Theme toggle button ───────────────────────────────── */
-#theme-toggle {
-  background-color: #8758b3;
+/* ── Login Modal ───────────────────────────────────────── */
+.login-modal {
+  max-width: 380px;
+}
+
+.login-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: -6px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login-field label {
+  font-size: 12px;
+  color: var(--purple);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.login-field input {
+  border: 2px solid #ddd;
+  border-radius: var(--r);
+  padding: 10px 12px;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-field input:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(132,88,179,0.15);
+}
+
+.login-field input::placeholder {
+  color: var(--text-muted);
+}
+
+.password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrap input {
+  padding-right: 42px;
+}
+
+.toggle-pw {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  transition: color var(--t);
+}
+
+.toggle-pw:hover {
+  color: var(--purple);
+}
+
+.forgot-link {
+  font-size: 12px;
+  color: var(--purple);
+  text-decoration: none;
+  text-align: right;
+  transition: opacity var(--t);
+}
+
+.forgot-link:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.login-submit {
+  background: var(--purple);
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: var(--r);
+  padding: 11px;
+  font-size: 15px;
   cursor: pointer;
-  font-family: Impact, sans-serif;
-  font-size: 14px;
-  transition: transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform var(--t), background var(--t);
 }
 
-#theme-toggle:hover {
+.login-submit:hover {
+  transform: scale(1.02);
+  background: var(--purple-h);
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #bbb;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.signup-link-btn {
+  background: none;
+  border: 2px solid var(--purple);
+  border-radius: var(--r);
+  padding: 9px;
+  font-size: 13px;
+  color: var(--purple);
+  cursor: pointer;
+  text-align: center;
+  transition: background var(--t), transform var(--t);
+}
+
+.signup-link-btn:hover {
+  background: rgba(132,88,179,0.08);
+  transform: scale(1.02);
+}
+
+body.dark .login-field input {
+  border-color: #5a5d70;
+}
+
+body.dark .login-field label,
+body.dark .forgot-link {
+  color: #c4a0f0;
+}
+
+body.dark .signup-link-btn {
+  border-color: #c4a0f0;
+  color: #c4a0f0;
+}
+
+body.dark .signup-link-btn:hover {
+  background: rgba(196,160,240,0.1);
+}
+
+/* ── Home: Hero ────────────────────────────────────────── */
+.hero {
+  min-height: calc(100vh - 54px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 60%, var(--body-bg) 100%);
+}
+
+body.dark .hero-bg {
+  background: linear-gradient(135deg, #5c3d8a 0%, #3a6a80 60%, var(--body-bg) 100%);
+}
+
+.hero-content,
+.hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 480px;
+}
+
+.hero-visual {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.hero-visual img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: var(--R);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.hero-eyebrow {
+  font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-headline {
+  font-size: clamp(48px, 8vw, 80px);
+  color: white;
+  line-height: 1.05;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.15);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 420px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: white;
+  color: var(--purple);
+  border: none;
+  border-radius: 8px;
+  padding: 13px 26px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+  transition: transform var(--t), box-shadow var(--t);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.22);
+}
+
+.btn-primary.large {
+  font-size: 17px;
+  padding: 15px 32px;
+}
+
+.btn-ghost {
+  background: rgba(255,255,255,0.18);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.55);
+  border-radius: 8px;
+  padding: 13px 24px;
+  font-size: 15px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(6px);
+  transition: transform var(--t), background var(--t);
+}
+
+.btn-ghost:hover {
   transform: scale(1.04);
+  background: rgba(255,255,255,0.28);
 }
 
-/* ── Dark Mode ─────────────────────────────────────────── */
-.dark {
-  background-color: #494D5F;
+.md-chip {
+  font-size: 7px;
+  background: rgba(132,88,179,0.3);
+  color: #5a3a8a;
+  border-radius: 2px;
+  padding: 0 2px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  display: block;
 }
 
-.dark .calendar,
-.dark .planner {
-  background-color: #659ebb;
+body.dark .md-chip {
+  color: #ddd;
 }
 
-.dark .days .day {
-  background-color: #494D5F;
-  color: #e5eaf5;
+.mp-header {
+  font-size: 14px;
+  color: white;
+  border-bottom: 1px solid var(--purple);
+  padding-bottom: 8px;
 }
 
-.dark .task-dot-label {
-  background-color: rgba(255,255,255,0.15);
-  color: #e5eaf5;
+.mp-task {
+  font-size: 12px;
+  background: var(--surface);
+  color: var(--text);
+  border-radius: var(--r);
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 
-.dark .task-item {
-  background-color: #494D5F;
-  color: #e5eaf5;
+.mp-task i {
+  color: var(--purple);
+  font-size: 10px;
 }
 
-.dark .task-item:hover {
-  background-color: #8458B3;
+.mp-add {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px;
 }
 
-.dark .add-task-form input,
-.dark .add-task-form textarea {
-  background-color: #494D5F;
-  color: #e5eaf5;
+/* ── Home: Features ────────────────────────────────────── */
+.features {
+  background: var(--body-bg);
+  padding: 70px 40px;
+  text-align: center;
 }
 
-.dark .add-task-form input::placeholder,
-.dark .add-task-form textarea::placeholder {
-  color: #aaa;
+.features h2 {
+  font-size: clamp(22px, 4vw, 34px);
+  color: var(--text);
+  margin-bottom: 40px;
 }
 
-.dark .modal {
-  background-color: #3a3d4d;
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.dark .modal-title {
-  color: #e5eaf5;
+.feature-card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 28px 22px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: left;
 }
 
-.dark .modal-desc {
-  color: #ccc;
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(132,88,179,0.15);
 }
 
-.dark .modal-close {
-  color: #aaa;
+.feature-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--purple);
+  border-radius: var(--R);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.feature-card h3 {
+  font-size: 17px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
+/* ── Home: CTA & Footer ────────────────────────────────── */
+.cta-banner {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  padding: 70px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.cta-banner h2 {
+  font-size: clamp(24px, 4vw, 38px);
+  color: white;
+}
+
+.cta-banner p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 8px;
+}
+
+.site-footer {
+  background: #333;
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 36px;
+  font-size: 14px;
+}
+
+.footer-copy {
+  font-size: 12px;
+}
+
+body.dark .site-footer {
+  background: #1e1f28;
 }
 
 /* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    padding: 50px 24px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-eyebrow,
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-sub {
+    margin: 0 auto 32px;
+  }
+
+  .hero-visual {
+    align-items: center;
+  }
+}
+
 @media (max-width: 700px) {
   .container {
     flex-direction: column;
@@ -486,5 +984,16 @@ body {
   .planner {
     width: 100%;
     max-width: 600px;
+  }
+}
+
+@media (max-width: 500px) {
+  .features,
+  .cta-banner {
+    padding: 50px 20px;
+  }
+
+  .site-footer {
+    padding: 16px 20px;
   }
 }

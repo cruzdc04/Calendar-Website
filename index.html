@@ -9,81 +9,203 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <title>Calendar</title>
+    <title>Planner</title>
   </head>
   <body>
-    <div class="container">
-      <!-- CALENDAR -->
-      <div class="calendar">
-        <div class="header">
-          <div class="month"></div>
-          <div class="btns">
-            <button id="theme-toggle">Dark Mode</button>
-            <div class="btn today-btn"><i class="fas fa-calendar-day"></i></div>
-            <div class="btn prev-btn"><i class="fas fa-chevron-left"></i></div>
-            <div class="btn next-btn"><i class="fas fa-chevron-right"></i></div>
-          </div>
-        </div>
-        <div class="weekdays">
-          <div class="day">Sun</div>
-          <div class="day">Mon</div>
-          <div class="day">Tue</div>
-          <div class="day">Wed</div>
-          <div class="day">Thu</div>
-          <div class="day">Fri</div>
-          <div class="day">Sat</div>
-        </div>
-        <div class="days"></div>
-      </div>
-
-      <!-- PLANNER PANEL -->
-      <div class="planner" id="planner">
-        <div class="planner-header">
-          <span class="planner-date" id="planner-date">Select a day</span>
-          <button class="planner-close" id="planner-close">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-
-        <div class="task-list" id="task-list">
-          <p class="no-tasks" id="no-tasks">No tasks for this day.</p>
-        </div>
-
-        <div class="add-task-form" id="add-task-form">
-          <input
-            type="text"
-            id="task-title"
-            placeholder="Task title..."
-            maxlength="40"
-          />
-          <textarea
-            id="task-desc"
-            placeholder="Description (optional)..."
-            maxlength="300"
-          ></textarea>
-          <button id="add-task-btn">
-            <i class="fas fa-plus"></i> Add Task
-          </button>
-        </div>
-      </div>
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <span class="topbar-logo"
+        ><i class="fas fa-calendar-alt"></i> Planner</span
+      >
+      <button class="login-btn" id="login-btn">
+        <i class="fas fa-user"></i> Log In
+      </button>
     </div>
 
-    <!-- TASK DETAIL MODAL -->
-    <div class="modal-overlay" id="modal-overlay">
-      <div class="modal">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">
+          <i class="fas fa-star"></i> Your days, organized
+        </p>
+        <h1 class="hero-headline">Plan Less.<br />Do More.</h1>
+        <p class="hero-sub">
+          A clean, fast calendar planner that lives in your browser. Add tasks
+          to any day, write notes, and stay on top of what matters with no
+          account required to get started.
+        </p>
+        <div class="hero-actions">
+          <a href="calendar.html" class="btn-primary"
+            ><i class="fas fa-calendar-alt"></i> Open My Calendar</a
+          >
+          <button class="btn-ghost" id="hero-login-btn">
+            <i class="fas fa-user"></i> Log In
+          </button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="cal.png" alt="Calendar preview" class="hero-mockup" />
+        <img src="info.png" alt="Planner preview" class="hero-mockup" />
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <h2 class="features-heading">Everything you need, nothing you don't.</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-tasks"></i></div>
+          <h3>Task Planner</h3>
+          <p>
+            Click any day to open a side panel and add tasks with optional
+            notes. Click a task to view details or delete it.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-database"></i></div>
+          <h3>Saved Locally</h3>
+          <p>
+            Your tasks are stored right in your browser with localStorage — no
+            sign-in needed to keep your data between sessions.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-moon"></i></div>
+          <h3>Dark Mode</h3>
+          <p>
+            One click toggles a crisp light theme and a comfortable dark mode.
+            Easy on the eyes no matter the hour.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Works Anywhere</h3>
+          <p>
+            Fully responsive across desktop, tablet, and mobile. Plan your week
+            from whatever device you're on.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+      <h2>Ready to get organized?</h2>
+      <p>No setup. No account. Just open the calendar and start planning.</p>
+      <a href="calendar.html" class="btn-primary large"
+        ><i class="fas fa-arrow-right"></i> Get Started Free</a
+      >
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <span><i class="fas fa-calendar-alt"></i> Planner</span>
+      <span class="footer-copy">Built by Daniel Cruz & Luis Quezada</span>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="login-overlay">
+      <div class="modal login-modal">
         <div class="modal-header">
-          <span class="modal-title" id="modal-title"></span>
-          <button class="modal-close" id="modal-close">
+          <span class="modal-title">Welcome Back</span>
+          <button class="modal-close" id="login-modal-close">
             <i class="fas fa-times"></i>
           </button>
         </div>
-        <p class="modal-desc" id="modal-desc"></p>
-        <button class="modal-delete" id="modal-delete">
-          <i class="fas fa-trash"></i> Delete Task
-        </button>
+        <p class="login-subtitle">Log in to sync your tasks across devices.</p>
+        <div class="login-form">
+          <div class="login-field">
+            <label for="login-email"
+              ><i class="fas fa-envelope"></i> Email</label
+            >
+            <input
+              type="email"
+              id="login-email"
+              placeholder="your@email.com"
+              autocomplete="email"
+            />
+          </div>
+          <div class="login-field">
+            <label for="login-password"
+              ><i class="fas fa-lock"></i> Password</label
+            >
+            <div class="password-wrap">
+              <input
+                type="password"
+                id="login-password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+              />
+              <button
+                class="toggle-pw"
+                id="toggle-pw"
+                tabindex="-1"
+                aria-label="Show password"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <a href="#" class="forgot-link">Forgot password?</a>
+          <button class="login-submit" id="login-submit">
+            <i class="fas fa-sign-in-alt"></i> Log In
+          </button>
+          <p class="login-divider"><span>or</span></p>
+          <button class="signup-link-btn">
+            Don't have an account? <strong>Sign up</strong>
+          </button>
+        </div>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+      const loginOverlay = document.getElementById("login-overlay");
+      const loginModalClose = document.getElementById("login-modal-close");
+      const loginSubmit = document.getElementById("login-submit");
+      const togglePw = document.getElementById("toggle-pw");
+      const loginPassword = document.getElementById("login-password");
+
+      function openLogin() {
+        loginOverlay.classList.add("open");
+      }
+      function closeLogin() {
+        loginOverlay.classList.remove("open");
+      }
+
+      document.getElementById("login-btn").addEventListener("click", openLogin);
+      document
+        .getElementById("hero-login-btn")
+        .addEventListener("click", openLogin);
+      loginModalClose.addEventListener("click", closeLogin);
+      loginOverlay.addEventListener("click", (e) => {
+        if (e.target === loginOverlay) closeLogin();
+      });
+
+      togglePw.addEventListener("click", () => {
+        const isText = loginPassword.type === "text";
+        loginPassword.type = isText ? "password" : "text";
+        togglePw.querySelector("i").className = isText
+          ? "fas fa-eye"
+          : "fas fa-eye-slash";
+      });
+
+      loginSubmit.addEventListener("click", () => {
+        const email = document.getElementById("login-email").value.trim();
+        const pass = loginPassword.value;
+        if (!email || !pass) {
+          loginSubmit.style.background = "#c0392b";
+          loginSubmit.textContent = "Fill in all fields";
+          setTimeout(() => {
+            loginSubmit.style.background = "";
+            loginSubmit.innerHTML = '<i class="fas fa-sign-in-alt"></i> Log In';
+          }, 1800);
+          return;
+        }
+
+        console.log("Login attempted:", email);
+        closeLogin();
+      });
+    </script>
   </body>
 </html>
