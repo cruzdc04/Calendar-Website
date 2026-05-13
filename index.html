@@ -1,57 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href="style.css" />
-
     <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-
     <title>Calendar</title>
-</head>
-
-<body>
-
-<div class="container">
-    <div class="calendar">
+  </head>
+  <body>
+    <div class="container">
+      <!-- CALENDAR -->
+      <div class="calendar">
         <div class="header">
-            <div class="month"></div>
-            <div class="btns">
-    <button id="theme-toggle">Dark Mode</button>         
-
-    <div class="btn today-btn">
-        <i class="fas fa-calendar-day"></i>
-    </div>
-
-    <div class="btn prev-btn">
-        <i class="fas fa-chevron-left"></i>
-    </div>
-
-    <div class="btn next-btn">
-        <i class="fas fa-chevron-right"></i>
-    </div>
-</div>
-</div>
-<div class="weekdays">
-    <div class="day">Sun</div>
-    <div class="day">Mon</div>
-    <div class="day">Tue</div>
-    <div class="day">Wed</div>
-    <div class="day">Thu</div>
-    <div class="day">Fri</div>
-    <div class="day">Sat</div>
-</div>
-<div class="days">
-
+          <div class="month"></div>
+          <div class="btns">
+            <button id="theme-toggle">Dark Mode</button>
+            <div class="btn today-btn"><i class="fas fa-calendar-day"></i></div>
+            <div class="btn prev-btn"><i class="fas fa-chevron-left"></i></div>
+            <div class="btn next-btn"><i class="fas fa-chevron-right"></i></div>
+          </div>
         </div>
-    </div>
-</div>
-    <script src="script.js"></script>
+        <div class="weekdays">
+          <div class="day">Sun</div>
+          <div class="day">Mon</div>
+          <div class="day">Tue</div>
+          <div class="day">Wed</div>
+          <div class="day">Thu</div>
+          <div class="day">Fri</div>
+          <div class="day">Sat</div>
+        </div>
+        <div class="days"></div>
+      </div>
 
-</body>
+      <!-- PLANNER PANEL -->
+      <div class="planner" id="planner">
+        <div class="planner-header">
+          <span class="planner-date" id="planner-date">Select a day</span>
+          <button class="planner-close" id="planner-close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="task-list" id="task-list">
+          <p class="no-tasks" id="no-tasks">No tasks for this day.</p>
+        </div>
+
+        <div class="add-task-form" id="add-task-form">
+          <input
+            type="text"
+            id="task-title"
+            placeholder="Task title..."
+            maxlength="40"
+          />
+          <textarea
+            id="task-desc"
+            placeholder="Description (optional)..."
+            maxlength="300"
+          ></textarea>
+          <button id="add-task-btn">
+            <i class="fas fa-plus"></i> Add Task
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASK DETAIL MODAL -->
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <span class="modal-title" id="modal-title"></span>
+          <button class="modal-close" id="modal-close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <button class="modal-delete" id="modal-delete">
+          <i class="fas fa-trash"></i> Delete Task
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>
